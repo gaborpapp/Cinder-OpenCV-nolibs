@@ -1,0 +1,12 @@
+env = Environment()
+
+env['APP_TARGET'] = 'ocvBasicApp'
+env['APP_SOURCES'] = ['ocvBasicApp.cpp']
+env['ASSETS'] = ['dfw.jpg']
+env['DEBUG'] = 0
+
+# Cinder-OpenCV block
+env = SConscript('../../../scons/SConscript', exports = ['env'])
+
+SConscript('../../../../../scons/SConscript', exports = ['env'])
+
