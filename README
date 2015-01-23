@@ -1,3 +1,4 @@
 This is the OpenCV CinderBlock, designed for use with the open-source C++ library Cinder: http://libcinder.org
 
-OpenCV 2.4.9.
+Fork of [Cinder-OpenCV](https://github.com/cinder/Cinder-OpenCV) with binaries removed
+Donwload libraries [OpenCV 2.4.9.](https://app.box.com/s/fpi48bgo3tarka9ehw3vav1x89pgcmus)
