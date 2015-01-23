@@ -1,5 +1,6 @@
 #include "cinder/app/AppNative.h"
 #include "cinder/app/RendererGl.h"
+#include "cinder/gl/Texture.h"
 #include "cinder/Capture.h"
 #include "cinder/params/Params.h"
 
@@ -63,9 +64,9 @@ void ocvOpticalFlowApp::trackFeatures( cv::Mat currentFrame )
 void ocvOpticalFlowApp::update()
 {
 	if( mCapture->checkNewFrame() ) {
-		Surface surface( mCapture->getSurface() );
-		mTexture = gl::Texture::create( surface );
-		cv::Mat currentFrame( toOcv( Channel( surface ) ) );
+		SurfaceRef surface = ( mCapture->getSurface() );
+		mTexture = gl::Texture::create( *surface );
+		cv::Mat currentFrame( toOcv( Channel( *surface ) ) );
 		if( mPrevFrame.data ) {
 			if( mFeatures.empty() || getElapsedFrames() % 30 == 0 ) // pick new features once every 30 frames, or the first frame
 				chooseFeatures( mPrevFrame );

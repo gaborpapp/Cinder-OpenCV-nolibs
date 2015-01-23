@@ -1,5 +1,6 @@
 #include "cinder/app/AppNative.h"
 #include "cinder/app/RendererGl.h"
+#include "cinder/gl/Texture.h"
 #include "cinder/Capture.h"
 
 #include "CinderOpenCV.h"
@@ -31,7 +32,7 @@ void ocvCaptureApp::setup()
 void ocvCaptureApp::update()
 {
 	if( mCapture && mCapture->checkNewFrame() ) {
-		cv::Mat input( toOcv( mCapture->getSurface() ) ), output;
+		cv::Mat input( toOcv( *mCapture->getSurface() ) ), output;
 
 		cv::Sobel( input, output, CV_8U, 1, 0 );
 		

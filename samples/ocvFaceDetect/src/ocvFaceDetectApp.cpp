@@ -1,5 +1,6 @@
 #include "cinder/app/AppNative.h"
 #include "cinder/app/RendererGl.h"
+#include "cinder/gl/Texture.h"
 #include "cinder/Capture.h"
 
 #include "CinderOpenCv.h"
@@ -12,7 +13,7 @@ class ocvFaceDetectApp : public AppNative {
  public:
 	void setup() override;
 
-	void updateFaces( Surface cameraImage );
+	void updateFaces( SurfaceRef cameraImage );
 	void update() override;
 	
 	void draw() override;
@@ -33,16 +34,16 @@ void ocvFaceDetectApp::setup()
 	mCapture->start();
 }
 
-void ocvFaceDetectApp::updateFaces( Surface cameraImage )
+void ocvFaceDetectApp::updateFaces( SurfaceRef cameraImage )
 {
 	const int calcScale = 2; // calculate the image at half scale
 
 	// create a grayscale copy of the input image
-	cv::Mat grayCameraImage( toOcv( cameraImage, CV_8UC1 ) );
+	cv::Mat grayCameraImage( toOcv( *cameraImage, CV_8UC1 ) );
 
 	// scale it to half size, as dictated by the calcScale constant
-	int scaledWidth = cameraImage.getWidth() / calcScale;
-	int scaledHeight = cameraImage.getHeight() / calcScale; 
+	int scaledWidth = cameraImage->getWidth() / calcScale;
+	int scaledHeight = cameraImage->getHeight() / calcScale;
 	cv::Mat smallImg( scaledHeight, scaledWidth, CV_8UC1 );
 	cv::resize( grayCameraImage, smallImg, smallImg.size(), 0, 0, cv::INTER_LINEAR );
 	
@@ -75,8 +76,8 @@ void ocvFaceDetectApp::updateFaces( Surface cameraImage )
 void ocvFaceDetectApp::update()
 {
 	if( mCapture->checkNewFrame() ) {
-		Surface surface = mCapture->getSurface();
-		mCameraTexture = gl::Texture::create( surface );
+		SurfaceRef surface = mCapture->getSurface();
+		mCameraTexture = gl::Texture::create( *surface );
 		updateFaces( surface );
 	}
 }
