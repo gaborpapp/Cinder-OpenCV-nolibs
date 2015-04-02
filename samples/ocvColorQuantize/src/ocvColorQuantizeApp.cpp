@@ -1,6 +1,6 @@
-#include "cinder/app/AppNative.h"
+#include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
-#include "cinder/gl/Texture.h"
+#include "cinder/gl/gl.h"
 #include "cinder/ImageIo.h"
 #include "cinder/params/Params.h"
 #include "cinder/ip/Fill.h"
@@ -10,7 +10,7 @@
 using namespace ci;
 using namespace ci::app;
 
-class ocvColorQuantizeApp : public AppNative {
+class ocvColorQuantizeApp : public App {
   public:
 	void setup();
 	void draw();
@@ -82,5 +82,4 @@ void ocvColorQuantizeApp::draw()
 	gl::draw( mTexture );	
 }
 
-
-CINDER_APP_NATIVE( ocvColorQuantizeApp, RendererGl )
+CINDER_APP( ocvColorQuantizeApp, RendererGl )

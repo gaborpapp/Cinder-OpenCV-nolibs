@@ -1,6 +1,6 @@
-#include "cinder/app/AppNative.h"
+#include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
-#include "cinder/gl/Texture.h"
+#include "cinder/gl/gl.h"
 #include "cinder/ImageIo.h"
 
 #include "CinderOpenCv.h"
@@ -10,7 +10,7 @@
 using namespace ci;
 using namespace ci::app;
 
-class ocvBasicApp : public AppNative {
+class ocvBasicApp : public App {
   public:
 	void setup();
 	void draw();
@@ -40,4 +40,4 @@ void ocvBasicApp::draw()
 	gl::draw( mTexture );
 }
 
-CINDER_APP_NATIVE( ocvBasicApp, RendererGl )
+CINDER_APP( ocvBasicApp, RendererGl )

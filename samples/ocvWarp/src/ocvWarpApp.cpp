@@ -1,6 +1,6 @@
-#include "cinder/app/AppBasic.h"
+#include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
-#include "cinder/gl/Texture.h"
+#include "cinder/gl/gl.h"
 #include "cinder/ImageIo.h"
 #include "cinder/params/Params.h"
 
@@ -9,7 +9,7 @@
 using namespace ci;
 using namespace ci::app;
 
-class ocvWarpApp : public AppBasic {
+class ocvWarpApp : public App {
   public:
 	void setup();
 	void draw();
@@ -72,5 +72,4 @@ void ocvWarpApp::draw()
 	mParams.draw();
 }
 
-
-CINDER_APP_BASIC( ocvWarpApp, RendererGl )
+CINDER_APP( ocvWarpApp, RendererGl )
